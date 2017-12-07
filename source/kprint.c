@@ -53,6 +53,7 @@ LOOP_BEGIN:
     if (*format == '\n') {
       put_unix_time();
       put_str(": ");
+      put_char('\r');
     }
   }
 FORMAT_PLUS:
@@ -60,6 +61,7 @@ FORMAT_PLUS:
   goto LOOP_BEGIN;
 LOOP_END:
   put_char('\n');
+  put_char('\r');
   va_end(argp);
 }
 
