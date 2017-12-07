@@ -51,7 +51,6 @@ LOOP_BEGIN:
         break;
       default:
         put_str("%?");
-        break;
     }
   }
   else {
