@@ -17,7 +17,6 @@ void put_hex_u8(uint8_t i);
  * 
  * format:
  * %% => %
- * %t => unit time
  * %u => hex unsigned int
  * %c => char
  * %s => string
@@ -25,7 +24,7 @@ void put_hex_u8(uint8_t i);
 void kprint(const char* format, ...) {
   va_list argp;
   va_start(argp, format);
-
+  put_unix_time(); put_str(": ");  
 LOOP_BEGIN:
   if (*format == '\0')
     goto LOOP_END;
@@ -34,9 +33,6 @@ LOOP_BEGIN:
     switch(*format) {
       case '%':
         put_char('%');
-        break;
-      case 't':
-        put_unix_time();
         break;
       case 'u':
         put_hex_u32(va_arg(argp, unsigned int));
@@ -52,7 +48,13 @@ LOOP_BEGIN:
         break;
     }
   }
-  else put_char(*format);
+  else {
+    put_char(*format);
+    if (*format == '\n') {
+      put_unix_time();
+      put_str(": ");
+    }
+  }
 FORMAT_PLUS:
   ++format;
   goto LOOP_BEGIN;
