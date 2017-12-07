@@ -59,6 +59,7 @@ FORMAT_PLUS:
   ++format;
   goto LOOP_BEGIN;
 LOOP_END:
+  put_char('\n');
   va_end(argp);
 }
 
