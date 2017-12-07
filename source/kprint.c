@@ -41,10 +41,10 @@ LOOP_BEGIN:
         put_hex_u32(va_arg(argp, unsigned int));
         break;
       case 'b':
-        put_hex_u8(va_arg(argp, int));
+        put_hex_u8((uint8_t)va_arg(argp, unsigned int));
         break;
       case 'c':
-        put_char(va_arg(argp, char));
+        put_char(va_arg(argp, unsigned int));
         break;
       case 's':
         put_str(va_arg(argp, char *));
