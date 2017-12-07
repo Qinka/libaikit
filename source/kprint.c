@@ -51,9 +51,9 @@ LOOP_BEGIN:
   else {
     put_char(*format);
     if (*format == '\n') {
+      put_char('\r');
       put_unix_time();
       put_str(": ");
-      put_char('\r');
     }
   }
 FORMAT_PLUS:
