@@ -9,6 +9,8 @@ extern void put_unix_time();
 void put_str(char *);
 void put_hex_u32(uint32_t i);
 void put_hex_u8(uint8_t i);
+extern void __enter();
+extern void __exit();
 
 #define _DIGIT_HEX(x) (x += x > 9 ? '7' : '0')
 
@@ -22,6 +24,7 @@ void put_hex_u8(uint8_t i);
  * %s => string
  */
 void kprint(const char* format, ...) {
+  __enter();
   va_list argp;
   va_start(argp, format);
   put_unix_time(); put_str(": ");  
@@ -63,6 +66,7 @@ LOOP_END:
   put_char('\n');
   put_char('\r');
   va_end(argp);
+  __exit();
 }
 
 /**
